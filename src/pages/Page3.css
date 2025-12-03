@@ -1,0 +1,279 @@
+/* 전체 페이지 레이아웃 */
+.page3-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #fff9e9;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.page3-header {
+  padding: 20px 32px 8px;
+}
+
+.page3-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.page3-header p {
+  margin-top: 6px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* 메인 영역 */
+.page3-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gift-section {
+  text-align: center;
+}
+
+.gift-message {
+  font-size: 1rem;
+  margin-bottom: 16px;
+  color: #444;
+}
+
+/* 선물 상자 줄 */
+.gift-row {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-bottom: 14px;
+}
+
+/* 삐뚤삐뚤 선물 상자 */
+.gift-box {
+  width: 120px;
+  height: 120px;
+  border-radius: 22px 8px 18px 10px;
+  border: 3px solid #333;
+  background: #ffe4e1;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+  position: relative;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    opacity 0.2s ease;
+}
+
+.gift-box .gift-icon {
+  font-size: 2.2rem;
+  line-height: 120px;
+  text-align: center;
+}
+
+.gift-ribbon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 10px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  transform: translateX(-50%);
+}
+
+.gift-opened-label {
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  font-size: 0.7rem;
+  background: #333;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 999px;
+}
+
+/* 삐뚤삐뚤 회전 */
+.gift-box.rot-0 {
+  transform: rotate(-3deg);
+}
+
+.gift-box.rot-1 {
+  transform: rotate(2deg);
+}
+
+.gift-box.rot-2 {
+  transform: rotate(-1deg);
+}
+
+/* hover */
+.gift-box:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22);
+}
+
+/* 이미 열린 상자 */
+.gift-box.opened {
+  opacity: 0.6;
+}
+
+/* 섞는 중일 때 흔들리는 애니메이션 */
+.gift-box.shuffling {
+  animation: wobble 0.3s ease-in-out infinite;
+}
+
+@keyframes wobble {
+  0% {
+    transform: translateX(0) rotate(-2deg);
+  }
+  25% {
+    transform: translateX(-4px) rotate(2deg);
+  }
+  50% {
+    transform: translateX(4px) rotate(-1deg);
+  }
+  75% {
+    transform: translateX(-2px) rotate(3deg);
+  }
+  100% {
+    transform: translateX(0) rotate(-2deg);
+  }
+}
+
+/* 섞기 버튼 */
+.shuffle-btn {
+  margin-top: 4px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: none;
+  background: #333;
+  color: #fff;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease,
+    box-shadow 0.15s ease;
+}
+
+.shuffle-btn:hover {
+  background: #222;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+.shuffle-btn:disabled {
+  opacity: 0.7;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+.gift-hint {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* 아래 페이지 네비게이터 */
+.page3-nav {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+/* --- 쿠폰 모달 공통 --- */
+.coupon-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.coupon-card {
+  position: relative;
+  max-width: 480px;
+  width: 90%;
+  padding: 22px 26px 20px;
+  background: #f3e5c8;
+  border-radius: 16px;
+  border: 2px dashed #b48a57;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+  text-align: center;
+  overflow: hidden;
+}
+
+/* 종이 얼룩 느낌 */
+.coupon-paper-stain {
+  position: absolute;
+  inset: -10px;
+  background: radial-gradient(circle at 20% 10%, #f8edd6 0, transparent 55%),
+    radial-gradient(circle at 80% 90%, #f1d9b9 0, transparent 60%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.coupon-title {
+  position: relative;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.coupon-divider {
+  position: relative;
+  width: 100%;
+  height: 1px;
+  border-top: 1px dashed #b48a57;
+  margin-bottom: 10px;
+}
+
+.coupon-desc {
+  position: relative;
+  font-size: 0.95rem;
+  color: #5b4730;
+  line-height: 1.5;
+  white-space: pre-line;
+  margin-bottom: 16px;
+}
+
+.coupon-close-btn,
+.coupon-go-end-btn {
+  position: relative;
+  border: none;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* 일반 쿠폰 닫기 버튼 */
+.coupon-close-btn {
+  background: #e0c7a0;
+  color: #4b351e;
+}
+
+.coupon-close-btn:hover {
+  background: #d7b88c;
+}
+
+/* 마지막 약속 쿠폰 */
+.coupon-final {
+  transform: rotate(-1deg);
+}
+
+.coupon-go-end-btn {
+  background: #333;
+  color: #fff;
+  margin-top: 4px;
+}
+
+.coupon-go-end-btn:hover {
+  background: #222;
+}

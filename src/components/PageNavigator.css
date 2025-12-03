@@ -1,0 +1,38 @@
+/* src/components/PageNavigator.css */
+
+.nav-wrapper {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-arrow {
+  border: none;
+  background: #174f68;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.nav-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #174f68;
+  background: #fff;
+  cursor: pointer;
+}
+
+.nav-dot.active {
+  background: red;
+}

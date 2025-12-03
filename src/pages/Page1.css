@@ -1,0 +1,253 @@
+/* 전체 페이지 래퍼 */
+.page1-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 상단 헤더 */
+.page1-header {
+  padding: 20px 40px 10px;
+  z-index: 1;
+}
+
+.page1-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.page1-header p {
+  margin-top: 6px;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+/* 가운데 타임라인 영역 */
+.timeline-drag-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 10px 40px 0;
+  overflow: hidden;
+}
+
+/* 가로로 길게 펼쳐지는 스트립 (스크롤 대상) */
+.timeline-strip {
+  display: flex;
+  gap: 32px;
+  height: 100%;
+  overflow-x: auto;
+  padding-bottom: 24px;
+  scroll-behavior: smooth;
+
+  /* 스크롤바 숨기기 */
+  -ms-overflow-style: none; /* IE, Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.timeline-strip::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* 연대기 카드 하나 */
+.timeline-card {
+  position: relative;
+  flex: 0 0 260px; /* 카드 폭 */
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* 위/아래로 번갈아 배치 */
+.timeline-card.top {
+  align-items: flex-start;
+}
+
+.timeline-card.bottom {
+  align-items: flex-end;
+}
+
+.timeline-card-inner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 액자 프레임 */
+.timeline-frame {
+  width: 100%;
+  height: 40vh;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #f5f5f5;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  border: 4px solid #ffffff;
+}
+
+.timeline-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.timeline-card.top .timeline-frame {
+  transform: translateY(-10px);
+}
+
+.timeline-card.bottom .timeline-frame {
+  transform: translateY(10px);
+}
+
+/* 카드 아래 텍스트 라벨 */
+.timeline-label {
+  margin-top: 10px;
+  text-align: center;
+  max-width: 240px;
+}
+
+.timeline-label-main {
+  display: block;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.timeline-label-sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+/* 아래쪽 슬라이드 바 */
+.timeline-slider-container {
+  padding: 0 40px;
+  margin-bottom: 120px; /* 아래 네비게이터와 간격 */
+}
+
+.timeline-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: #e0e0e0;
+  outline: none;
+}
+
+/* 슬라이더 썸(핸들) 스타일 - 웹킷 */
+.timeline-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #333;
+  cursor: pointer;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.12);
+}
+
+/* 파이어폭스 */
+.timeline-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #333;
+  cursor: pointer;
+  border: none;
+}
+
+/* 페이지 네비게이터 위치 */
+.page1-nav {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+/* -------- 팝업(모달) 스타일 -------- */
+
+.image-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.image-modal {
+  position: relative;
+  max-width: 720px;
+  width: 90%;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 20px 26px 26px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-modal-img {
+  max-width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  border-radius: 16px;
+  margin-bottom: 16px;
+}
+
+.image-modal-text {
+  text-align: center;
+}
+
+.image-modal-text h2 {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+
+.image-modal-text p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* 닫기 버튼 */
+.image-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  border: none;
+  background: transparent;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+/* 좌우 화살표 */
+.image-modal-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.image-modal-arrow.left {
+  left: 8px;
+}
+
+.image-modal-arrow.right {
+  right: 8px;
+}

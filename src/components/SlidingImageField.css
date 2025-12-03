@@ -1,0 +1,38 @@
+/* 전체 화면 슬라이더 영역 */
+.slider-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+/* 실제로 슬라이드되는 이미지들 */
+.slider-img {
+  position: absolute;
+  left: 110vw; /* 오른쪽 화면 밖에서 시작 */
+  height: 140px;
+  object-fit: cover;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+
+  animation-name: slideRightToLeft;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* 슬라이드 일시정지 상태 */
+.slider-wrapper.paused .slider-img {
+  animation-play-state: paused;
+}
+
+/* 오른쪽 → 왼쪽으로 이동하는 애니메이션 */
+@keyframes slideRightToLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-170vw);
+  }
+}

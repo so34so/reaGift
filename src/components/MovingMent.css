@@ -1,0 +1,65 @@
+/* 이동 영역: Page1의 .page1-main 안에서 꽉 차게 */
+.moving-wrapper {
+  position: relative;
+  width: 100%;
+  height: calc(120vh - 120px);      /* 부모(.page1-main)의 flex 영역 전체 사용 */
+  overflow: hidden;
+  background: #ffffff;
+}
+
+/* 슬라이드 애니메이션은 그대로 */
+.moving-text {
+  position: absolute;
+  left: 110vw;
+  white-space: nowrap;
+  animation-name: slideRightToLeft;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  pointer-events: none;
+}
+
+@keyframes slideRightToLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-160vw); }
+}
+
+/* 카드 디자인 (반투명 트위터 스타일) */
+.moving-wrapper.theme-soft .ment-card {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+
+  min-width: 260px;
+  max-width: 360px;
+  padding: 12px 18px;
+
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 18px;
+  border: 1px solid rgba(209, 213, 219, 0.9);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
+  backdrop-filter: blur(4px);
+  color: #0f1419;
+
+  opacity: 0.95;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.moving-wrapper.theme-soft .ment-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.26);
+  opacity: 1;
+}
+
+.moving-wrapper.theme-soft .ment-line1 {
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.moving-wrapper.theme-soft .ment-line2 {
+  margin-top: 6px;
+  width: 100%;
+  font-size: 14px;
+  text-align: right;
+  color: #6b7280;
+}

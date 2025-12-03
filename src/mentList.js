@@ -1,0 +1,42 @@
+//src/mentList.js
+export const exampleMentList = [
+  { id: 1, name: '인물1', content: '웃긴멘트1.' },
+  { id: 2, name: '인물2', content: '웃긴멘트2.' },
+  { id: 3, name: '인물3', content: '웃긴멘트3.' },
+  { id: 4, name: '인물4', content: '웃긴멘트4.' },
+  { id: 5, name: '인물5', content: '웃긴멘트5.' },
+  { id: 6, name: '인물6', content: '웃긴멘트6.' },
+    { id: 7, name: '인물1', content: '웃긴멘트1.' },
+  { id: 8, name: '인물2', content: '웃긴멘트2.' },
+  { id: 9, name: '인물3', content: '웃긴멘트3.' },
+  { id: 10, name: '인물4', content: '웃긴멘트4.' },
+  { id: 11, name: '인물5', content: '웃긴멘트5.' },
+  { id: 12, name: '인물6', content: '웃긴멘트6.' },
+    { id: 13, name: '인물1', content: '웃긴멘트1.' },
+  { id: 14, name: '인물2', content: '웃긴멘트2.' },
+  { id: 15, name: '인물3', content: '웃긴멘트3.' },
+  { id: 16, name: '인물4', content: '웃긴멘트4.' },
+  { id: 17, name: '인물5', content: '웃긴멘트5.' },
+  { id: 18, name: '인물6', content: '웃긴멘트6.' },
+    { id: 19, name: '인물1', content: '웃긴멘트1.' },
+  { id: 20, name: '인물2', content: '웃긴멘트2.' },
+  { id: 21, name: '인물3', content: '웃긴멘트3.' },
+  { id: 22, name: '인물4', content: '웃긴멘트4.' },
+  { id: 23, name: '인물5', content: '웃긴멘트5.' },
+  { id: 24, name: '인물6', content: '웃긴멘트6.' },
+    { id: 25, name: '인물1', content: '웃긴멘트1.' },
+  { id: 26, name: '인물2', content: '웃긴멘트2.' },
+  { id: 27, name: '인물3', content: '웃긴멘트3.' },
+  { id: 28, name: '인물4', content: '웃긴멘트4.' },
+  { id: 29, name: '인물5', content: '웃긴멘트5.' },
+  { id: 30, name: '인물6', content: '웃긴멘트6.' },
+];
+
+// export const exampleMentList = [
+// "문장1",
+// "문장2",
+// "문장3",
+// "문장4",
+// "문장5",
+// "문장6"
+// ];
