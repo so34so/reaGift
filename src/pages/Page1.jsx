@@ -1,7 +1,7 @@
 // src/pages/Page1.jsx
 
 import { useState, useMemo, useRef } from 'react';
-import { imageList } from '../data/testImageList';
+import { imageList } from '../data/ImageList';
 import PageNavigator from '../components/PageNavigator';
 import './Page1.css';
 

@@ -1,7 +1,7 @@
 // src/pages/Page3.jsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { coupons, finalCoupon } from '../data/testCoupons';
+import { coupons, finalCoupon } from '../data/Coupons';
 import PageNavigator from '../components/PageNavigator';
 import './Page3.css';
 

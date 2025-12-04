@@ -14,4 +14,4 @@ export const introImages = [
   }
 ];
 
-export const MAIN_INTRO_ID = '2';
+export const MAIN_INTRO_ID = '1';
