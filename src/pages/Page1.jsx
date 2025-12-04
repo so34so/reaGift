@@ -57,14 +57,14 @@ const groupList = useMemo(() => {
 
   const showPrev = () => {
     if (currentGroup.length === 0) return;
-    setCurrentIndex(
-      (prev) => (prev - 1 + currentGroup.length) % currentGroup.length
-    );
+    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : prev));
   };
 
   const showNext = () => {
     if (currentGroup.length === 0) return;
-    setCurrentIndex((prev) => (prev + 1) % currentGroup.length);
+    setCurrentIndex((prev) =>
+      prev < currentGroup.length - 1 ? prev + 1 : prev
+    );
   };
 
   // --- 슬라이드 바 드래그 → 타임라인 스크롤 ---
@@ -163,35 +163,60 @@ const groupList = useMemo(() => {
       </div>
 
       {/* 팝업 모달 - 같은 x 그룹만 화살표 슬라이드 */}
-      {isModalOpen && currentImage && (
-        <div className="image-modal-backdrop" onClick={closeModal}>
-          <div
-            className="image-modal"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button className="image-modal-close" onClick={closeModal}>
-              ✕
-            </button>
+{isModalOpen && currentImage && (
+  <div className="image-modal-backdrop" onClick={closeModal}>
+    <div
+      className="image-modal"
+      onClick={(e) => e.stopPropagation()}
+    >
+<button
+  type="button"
+  className="image-modal-close"
+  onClick={(e) => {
+    e.stopPropagation();  // 배경 onClick으로 전달 안 되게
+    closeModal();
+  }}
+>
+  ✕
+</button>
 
-            <button className="image-modal-arrow left" onClick={showPrev}>
-              ◀
-            </button>
-            <button className="image-modal-arrow right" onClick={showNext}>
+
+      {/* 🔹 이미지 + 화살표 영역 */}
+      <div className="image-modal-main">
+        {currentGroup.length > 1 && currentIndex > 0 && (
+          <button
+            className="image-modal-arrow left"
+            onClick={showPrev}
+          >
+            ◀
+          </button>
+        )}
+
+        <img
+          src={currentImage.url}
+          alt={currentImage.name}
+          className="image-modal-img"
+        />
+
+        {currentGroup.length > 1 &&
+          currentIndex < currentGroup.length - 1 && (
+            <button
+              className="image-modal-arrow right"
+              onClick={showNext}
+            >
               ▶
             </button>
+          )}
+      </div>
 
-            <img
-              src={currentImage.url}
-              alt={currentImage.name}
-              className="image-modal-img"
-            />
-            <div className="image-modal-text">
-              <h2>{currentImage.name}</h2>
-              <p>{currentImage.content}</p>
-            </div>
-          </div>
-        </div>
-      )}
+      <div className="image-modal-text">
+        <h2>{currentImage.name}</h2>
+        <p>{currentImage.content}</p>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 }

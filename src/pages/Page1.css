@@ -185,23 +185,15 @@
 
 .image-modal {
   position: relative;
-  max-width: 720px;
+  max-width: 900px;
   width: 90%;
   background: #ffffff;
   border-radius: 20px;
-  padding: 20px 26px 26px;
+  padding: 24px 40px 32px;
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.image-modal-img {
-  max-width: 100%;
-  max-height: 60vh;
-  object-fit: contain;
-  border-radius: 16px;
-  margin-bottom: 16px;
 }
 
 .image-modal-text {
@@ -227,6 +219,7 @@
   background: transparent;
   font-size: 1.4rem;
   cursor: pointer;
+  z-index: 10;  
 }
 
 /* 좌우 화살표 */
@@ -235,19 +228,98 @@
   top: 50%;
   transform: translateY(-50%);
   border: none;
-  background: rgba(0, 0, 0, 0.4);
-  color: #fff;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
+  background: transparent;
+  color: #333;
+  font-size: 2.4rem;
   cursor: pointer;
-  font-size: 1.1rem;
+  padding: 0 6px;
+z-index: 2;
+}
+
+.image-modal-arrow:hover {
+  color: #000;                 /* 호버 시 조금 더 진하게 */
 }
 
 .image-modal-arrow.left {
-  left: 8px;
+  left: 40px;
+}
+.image-modal-arrow.right {
+  right: 40px;
 }
 
-.image-modal-arrow.right {
-  right: 8px;
+.image-modal-arrow {
+  outline: none;          /* 기본 아웃라인 제거 */
+}
+
+.image-modal-arrow:focus {
+  outline: none;          /* 클릭 후 생기는 선 제거 */
+}
+.image-modal-close,
+.image-modal-close:focus {
+  outline: none;
+}
+/* 이미지 + 화살표 영역 */
+.image-modal-main {
+  position: relative;        /* 화살표 absolute 기준 */
+  width: 100%;
+  display: flex;
+  justify-content: center;   /* 이미지 가운데 정렬 */
+  align-items: center;
+  margin-bottom: 16px;
+  z-index: 1; 
+}
+
+/* 기본(데스크탑) 이미지 크기 */
+.image-modal-img {
+  display: block;
+  max-width: calc(100% - 200px);  /* 양쪽 화살표 + 여백 포함 */
+  max-height: 72vh;
+  object-fit: contain;
+  border-radius: 16px;
+  margin: 0 auto 18px;
+}
+
+@media (max-width: 768px) {
+  .image-modal {
+    max-width: 100%;
+    width: calc(100% - 24px);   /* 화면 양쪽 12px 여백 */
+    padding: 16px;              /* 너무 두껍지 않게 */
+  }
+
+  .image-modal-main {
+    margin-bottom: 12px;
+  }
+
+  /* 👉 모바일에선 이미지 훨씬 크게 */
+  .image-modal-img {
+    max-width: calc(100% - 80px);  /* 양쪽 40px만 비워서 화살표 자리 */
+    max-height: 70vh;
+  }
+
+  .image-modal-arrow {
+    font-size: 2rem;
+  }
+
+  .image-modal-arrow.left {
+    left: 16px;
+  }
+
+  .image-modal-arrow.right {
+    right: 16px;
+  }
+}
+
+/* 아주 작은 폰(예: 480px 이하)에서는 조금 더 조정 */
+@media (max-width: 480px) {
+  .image-modal-img {
+    max-width: calc(100% - 60px);  /* 양쪽 30px */
+    max-height: 65vh;
+  }
+
+  .image-modal-arrow.left {
+    left: 12px;
+  }
+  .image-modal-arrow.right {
+    right: 12px;
+  }
 }
