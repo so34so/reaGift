@@ -14,20 +14,19 @@ export default function Page1() {
   const sliderRef = useRef(null); // 연대기 가로 스트립 div
 
   // 1) x 값별 대표 이미지 (연대기에 보여줄 카드)
-  const groupList = useMemo(() => {
-    const map = new Map(); // key: String(x), value: 대표 이미지(첫 번째로 등장한 것)
-    imageList.forEach((img) => {
-      const key = String(img.x);
-      if (!map.has(key)) {
-        map.set(key, img);
-      }
-    });
+const groupList = useMemo(() => {
+  const map = new Map();
+  imageList.forEach((img) => {
+    const key = String(img.x);
+    if (!map.has(key)) {
+      map.set(key, img);
+    }
+  });
 
-    return Array.from(map.entries()).map(([key, rep]) => ({
-      key,
-      rep,
-    }));
-  }, []);
+  return Array.from(map.entries())
+    .map(([key, rep]) => ({ key, rep }))
+    .sort((a, b) => Number(a.key) - Number(b.key));  // x 기준 오름차순
+}, []);
 
   // 2) 팝업에서 사용할 현재 그룹 (같은 x 값)
   const currentGroup = useMemo(() => {
