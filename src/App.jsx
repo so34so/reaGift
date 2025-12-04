@@ -19,8 +19,6 @@ function App() {
 
       <Route path="/end" element={<EndPage />} />
       
-      {/* 이상한 URL 들어오면 인트로로 보내기 */}
-      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
