@@ -3,6 +3,7 @@
 import { useState, useMemo, useRef } from 'react';
 import { imageList } from '../data/ImageList';
 import PageNavigator from '../components/PageNavigator';
+import { useDeviceMode } from '../hooks/useDeviceMode';
 import './Page1.css';
 
 export default function Page1() {
@@ -10,6 +11,7 @@ export default function Page1() {
   const [currentGroupKey, setCurrentGroupKey] = useState(null); // x 값
   const [currentIndex, setCurrentIndex] = useState(0);          // 그룹 내 index
   const [sliderValue, setSliderValue] = useState(0);            // 0 ~ 100
+const { isMobile } = useDeviceMode();
 
   const sliderRef = useRef(null); // 연대기 가로 스트립 div
 
