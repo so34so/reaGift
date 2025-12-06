@@ -30,4 +30,9 @@ const MobileMentList = () => {
             </div>
           </div>
         ))}
-      </di
+      </div>
+    </div>
+  );
+};
+
+export default MobileMentList;
