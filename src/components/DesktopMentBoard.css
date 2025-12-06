@@ -1,0 +1,66 @@
+.board-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #fdfaf3; /* 약간 종이 느낌 배경 */
+  overflow: hidden;
+}
+
+/* 포스트잇 카드 */
+.sticky-card {
+  position: absolute;
+  width: 260px;
+  min-height: 120px;
+  padding: 16px 18px 18px;
+  background: #fff9c4; /* 기본 연노랑 */
+  border-radius: 8px;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.22);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: default;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sticky-card:nth-child(3n + 1) {
+  background: #ffecb3; /* 노랑 계열 */
+}
+.sticky-card:nth-child(3n + 2) {
+  background: #e1f5fe; /* 하늘색 계열 */
+}
+.sticky-card:nth-child(3n + 3) {
+  background: #f3e5f5; /* 보라 계열 */
+}
+
+.sticky-card:hover {
+  transform: translate(-50%, -50%) scale(1.03);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.28);
+}
+
+/* 윗쪽 핀 */
+.sticky-pin {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* 텍스트 */
+.sticky-line1 {
+  margin-top: 18px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.sticky-line2 {
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: right;
+  color: #4b5563;
+}

@@ -1,0 +1,78 @@
+.mobile-ment-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #f9fafb;
+}
+
+/* 맨 위 고정 영역 */
+.mobile-ment-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  flex-shrink: 0;
+  padding: 18px 16px 10px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mobile-ment-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.mobile-ment-header p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* 댓글 리스트 영역 */
+.mobile-ment-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 12px 20px;
+}
+
+/* 댓글 하나 */
+.mobile-ment-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+/* 아바타 (이름 첫 글자 동그라미) */
+.mobile-ment-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+/* 말풍선 */
+.mobile-ment-bubble {
+  max-width: 80%;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 10px 12px;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+}
+
+.mobile-ment-content {
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.mobile-ment-name {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #9ca3af;
+  text-align: right;
+}

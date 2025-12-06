@@ -1,20 +1,20 @@
-/* 화면 전체를 덮는 Page1 전용 레이아웃 */
-.page1-root {
-  position: fixed;
-  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+.page2-root {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #ffffff;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* 위: main, 아래: nav */
-  align-items: center;
+  overflow: hidden;
 }
 
-/* 위쪽 메인 영역(카드 슬라이드) */
-.page1-main {
-  flex: 1;            /* 위쪽이 가능한 모든 높이를 차지 */
-  width: 100%;
+/* 위쪽 본문 영역 */
+.page2-main {
+  flex: 1;
+  min-height: 0; /* 자식에서 overflow-y 사용할 수 있게 */
 }
 
-/* 아래 네비 영역 */
-.page1-nav {
-  padding: 0 0;    /* 화살표 주변 여백 */
+/* 아래 네비게이터 영역 */
+.page2-nav {
+  flex-shrink: 0;
 }
