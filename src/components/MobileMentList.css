@@ -1,8 +1,6 @@
 .mobile-ment-wrapper {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
   background: #f9fafb;
+  color: #111827; /* 기본 글자색을 진한 검정으로 */
 }
 
 /* 맨 위 고정 영역 */
@@ -68,11 +66,11 @@
 .mobile-ment-content {
   font-size: 15px;
   line-height: 1.4;
+  color: #111827; /* 말풍선 안 본문 색 */
 }
 
 .mobile-ment-name {
   margin-top: 4px;
   font-size: 12px;
-  color: #9ca3af;
-  text-align: right;
+  color: #6b7280; /* 살짝 흐린 회색 */
 }

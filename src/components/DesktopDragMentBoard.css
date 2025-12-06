@@ -1,0 +1,118 @@
+/* 화면 전체를 쓰는 래퍼 + 배경 사진 고정 */
+.drag-board-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: grab;
+
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.drag-board-wrapper.dragging {
+  cursor: grabbing;
+}
+
+/* 실제로 좌우로 움직이는 가로 보드 (멘트만 포함) */
+.drag-board-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% * 2); /* BOARD_SCALE과 맞춰서 2배 */
+  height: 100%;
+}
+
+/* 하나의 멘트 */
+.drag-note {
+  position: absolute;
+  max-width: 320px;
+  color: #ffffff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.85);
+  transform: translate(-50%, -50%) rotate(var(--rotate-deg));
+  transition:
+    transform 0.18s ease,
+    text-shadow 0.18s ease,
+    opacity 0.18s ease;
+  opacity: 0.96;
+  cursor: pointer;
+}
+
+.drag-note:hover {
+  transform: translate(-50%, -50%) rotate(var(--rotate-deg)) scale(1.08);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.95);
+  opacity: 1;
+}
+
+.drag-note-text {
+  margin: 0;
+  font-size: var(--font-size, 22px);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.drag-note-author {
+  margin: 6px 0 0;
+  font-size: 14px;
+  text-align: right;
+  opacity: 0.95;
+}
+
+/* 팝업 모달 */
+.drag-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+}
+
+.drag-modal {
+  width: min(90vw, 480px);
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.45);
+  padding: 18px 20px 20px;
+  box-sizing: border-box;
+}
+
+.drag-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.drag-modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.drag-modal-close {
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.drag-modal-body {
+  margin-top: 4px;
+}
+
+.drag-modal-content {
+  margin: 0 0 10px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.drag-modal-author {
+  margin: 0;
+  font-size: 14px;
+  text-align: right;
+  color: #6b7280;
+}

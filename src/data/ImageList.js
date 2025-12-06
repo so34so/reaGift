@@ -775,10 +775,10 @@ export const imageList = [
   },
   {
     id: 5,
-    url: '',
-    name: '카페',
+    url: 'https://res.cloudinary.com/dkzferide/image/upload/v1765019299/G7aU1pYbQAAzTpZ_p9l82u.jpg',
+    name: '기타지만 메인 이미지',
     content: '조용한 카페에서 수다 떨던 날 ☕',
-    x: 1,
+    x: 43,
   },
   {
     id: 5,

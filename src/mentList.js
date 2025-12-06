@@ -24,6 +24,11 @@ export const exampleMentList = [
   { id: 22, name: '항아리', content: '레아 최고!!!!!!' },
   { id: 23, name: '항아리', content: '아모레로써도 au로써도 에쿠레아로써도 항상 멋있는 라이브를 보여줘서 고마워 사랑해' },
   { id: 24, name: '항아리', content: '덕분에 행복했어 앞으로도 행복하자' },
+    { id: 25, name: '항아리', content: '레아짱!레아짱!레아짱!레아짱!레아짱!' },
+  { id: 26, name: '항아리', content: '고마워요' },
+  { id: 27, name: '항아리', content: '레아 최고!!!!!!' },
+  { id: 28, name: '항아리', content: '아모레로써도 au로써도 에쿠레아로써도 항상 멋있는 라이브를 보여줘서 고마워 사랑해' },
+  { id: 29, name: '항아리', content: '덕분에 행복했어 앞으로도 행복하자' },
 ];
 
 // export const exampleMentList = [
