@@ -1,15 +1,20 @@
+/* 전체 래퍼: 세로 flex + 전체 높이 */
 .mobile-ment-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;          /* 부모가 꽉 차 있어야 함 (아래에서 설명) */
   background: #f9fafb;
-  color: #111827; /* 기본 글자색을 진한 검정으로 */
+  color: #111827;
+  overflow: hidden;      /* 헤더 + 리스트 조합에서 바깥은 숨김 */
 }
 
-/* 맨 위 고정 영역 */
+/* 상단 고정 헤더 */
 .mobile-ment-header {
   position: sticky;
   top: 0;
   z-index: 1;
   flex-shrink: 0;
-  padding: 18px 16px 10px;
+  padding: 16px 16px 10px;
   background: #ffffff;
   border-bottom: 1px solid #e5e7eb;
 }
@@ -26,51 +31,67 @@
   color: #6b7280;
 }
 
-/* 댓글 리스트 영역 */
+/* 리스트 영역: 여기서 세로 스크롤 */
 .mobile-ment-list {
   flex: 1;
   overflow-y: auto;
-  padding: 12px 12px 20px;
+  padding: 8px 12px 20px;
 }
 
-/* 댓글 하나 */
+/* ---------- 트위터 스타일 아이템 ---------- */
+
 .mobile-ment-item {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 12px;
+  padding: 10px 4px;
+  gap: 10px;
 }
 
-/* 아바타 (이름 첫 글자 동그라미) */
+/* 아바타: 동그란 이미지 느낌 */
 .mobile-ment-avatar {
-  width: 32px;
-  height: 32px;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
   border-radius: 999px;
-  background: #e5e7eb;
+  background: linear-gradient(135deg, #f97316, #ec4899);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
-  font-weight: 600;
-  margin-right: 8px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffffff;
 }
 
-/* 말풍선 */
-.mobile-ment-bubble {
-  max-width: 80%;
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 10px 12px;
-  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+/* 오른쪽 내용 전체 */
+.mobile-ment-body {
+  flex: 1;
+  min-width: 0;
 }
 
-.mobile-ment-content {
-  font-size: 15px;
-  line-height: 1.4;
-  color: #111827; /* 말풍선 안 본문 색 */
+/* 닉네임 줄 */
+.mobile-ment-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
 }
 
 .mobile-ment-name {
-  margin-top: 4px;
-  font-size: 12px;
-  color: #6b7280; /* 살짝 흐린 회색 */
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* 멘트 텍스트 */
+.mobile-ment-content {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #111827;
+  white-space: pre-wrap;
+  word-break: break-word;
+  padding-right: 6px;
+}
+
+/* 아이템 사이 구분선 (선택사항) */
+.mobile-ment-item + .mobile-ment-item {
+  border-top: 1px solid #e5e7eb;
 }
