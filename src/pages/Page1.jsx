@@ -1,5 +1,4 @@
 // src/pages/Page1.jsx
-
 import { useState, useMemo, useRef } from 'react';
 import { imageList } from '../data/ImageList';
 import PageNavigator from '../components/PageNavigator';
@@ -8,38 +7,58 @@ import './Page1.css';
 
 export default function Page1() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentGroupKey, setCurrentGroupKey] = useState(null); // x 값
-  const [currentIndex, setCurrentIndex] = useState(0);          // 그룹 내 index
-  const [sliderValue, setSliderValue] = useState(0);            // 0 ~ 100
-const { isMobile } = useDeviceMode();
+  const [currentGroupKey, setCurrentGroupKey] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [sliderValue, setSliderValue] = useState(0);
 
-  const sliderRef = useRef(null); // 연대기 가로 스트립 div
+  const { isMobile } = useDeviceMode();
+  const sliderRef = useRef(null);
 
-  // 1) x 값별 대표 이미지 (연대기에 보여줄 카드)
-const groupList = useMemo(() => {
-  const map = new Map();
-  imageList.forEach((img) => {
-    const key = String(img.x);
-    if (!map.has(key)) {
-      map.set(key, img);
-    }
-  });
+const touchStartRef = useRef({ x: 0, y: 0 });
 
-  return Array.from(map.entries())
-    .map(([key, rep]) => ({ key, rep }))
-    .sort((a, b) => Number(a.key) - Number(b.key));  // x 기준 오름차순
-}, []);
+const handleTouchStart = (e) => {
+  if (!isMobile) return;
+  const t = e.touches[0];
+  touchStartRef.current = { x: t.clientX, y: t.clientY };
+};
 
-  // 2) 팝업에서 사용할 현재 그룹 (같은 x 값)
+const handleTouchEnd = (e) => {
+  if (!isMobile) return;
+  const t = e.changedTouches[0];
+  const dx = t.clientX - touchStartRef.current.x;
+  const dy = t.clientY - touchStartRef.current.y;
+
+  // 수평 스와이프만 인정 (세로 스크롤 오인 방지)
+  const H_THRESHOLD = 40;
+  const V_LIMIT = 80;
+
+  if (Math.abs(dx) > H_THRESHOLD && Math.abs(dy) < V_LIMIT) {
+    if (dx < 0) showNext();  // 왼쪽으로 밀면 다음
+    else showPrev();         // 오른쪽으로 밀면 이전
+  }
+};
+
+  // 1) x 값별 대표 이미지
+  const groupList = useMemo(() => {
+    const map = new Map();
+    imageList.forEach((img) => {
+      const key = String(img.x);
+      if (!map.has(key)) map.set(key, img);
+    });
+
+    return Array.from(map.entries())
+      .map(([key, rep]) => ({ key, rep }))
+      .sort((a, b) => Number(a.key) - Number(b.key));
+  }, []);
+
+  // 2) 팝업에서 사용할 현재 그룹
   const currentGroup = useMemo(() => {
     if (currentGroupKey === null) return [];
     return imageList.filter((img) => String(img.x) === String(currentGroupKey));
   }, [currentGroupKey]);
 
-  const currentImage =
-    currentGroup.length > 0 ? currentGroup[currentIndex] : null;
+  const currentImage = currentGroup.length > 0 ? currentGroup[currentIndex] : null;
 
-  // --- 카드 클릭 → 해당 x 그룹 팝업 열기 ---
   const openModalForGroup = (groupKey, repId) => {
     const group = imageList.filter((img) => String(img.x) === String(groupKey));
     let initialIndex = 0;
@@ -47,15 +66,12 @@ const groupList = useMemo(() => {
       const foundIndex = group.findIndex((img) => img.id === repId);
       if (foundIndex !== -1) initialIndex = foundIndex;
     }
-
     setCurrentGroupKey(groupKey);
     setCurrentIndex(initialIndex);
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const closeModal = () => setIsModalOpen(false);
 
   const showPrev = () => {
     if (currentGroup.length === 0) return;
@@ -64,52 +80,61 @@ const groupList = useMemo(() => {
 
   const showNext = () => {
     if (currentGroup.length === 0) return;
-    setCurrentIndex((prev) =>
-      prev < currentGroup.length - 1 ? prev + 1 : prev
-    );
+    setCurrentIndex((prev) => (prev < currentGroup.length - 1 ? prev + 1 : prev));
   };
 
-  // --- 슬라이드 바 드래그 → 타임라인 스크롤 ---
+  // ✅ 공통: 현재 모드(모바일/데스크탑)에 맞는 최대 스크롤 계산
+  const getMaxScroll = (el) => {
+    if (!el) return 0;
+    return isMobile
+      ? el.scrollHeight - el.clientHeight
+      : el.scrollWidth - el.clientWidth;
+  };
+
+  // ✅ 슬라이더 드래그 → (모바일: 세로 이동 / 데스크탑: 가로 이동)
   const handleSliderChange = (e) => {
     const value = Number(e.target.value);
     setSliderValue(value);
 
-    if (!sliderRef.current) return;
-    const maxScroll =
-      sliderRef.current.scrollWidth - sliderRef.current.clientWidth;
+    const el = sliderRef.current;
+    if (!el) return;
+
+    const maxScroll = getMaxScroll(el);
     if (maxScroll <= 0) return;
 
-    sliderRef.current.scrollLeft = (maxScroll * value) / 100;
+    const nextPos = (maxScroll * value) / 100;
+    if (isMobile) el.scrollTop = nextPos;
+    else el.scrollLeft = nextPos;
   };
 
-  // --- 타임라인 스크롤 시 슬라이드 바 동기화 (휠, 키보드 등) ---
+  // ✅ 타임라인 스크롤 시 슬라이더 동기화
   const handleTimelineScroll = () => {
-    if (!sliderRef.current) return;
-    const maxScroll =
-      sliderRef.current.scrollWidth - sliderRef.current.clientWidth;
+    const el = sliderRef.current;
+    if (!el) return;
+
+    const maxScroll = getMaxScroll(el);
     if (maxScroll <= 0) {
       setSliderValue(0);
       return;
     }
-    const ratio = sliderRef.current.scrollLeft / maxScroll;
+
+    const ratio = isMobile ? el.scrollTop / maxScroll : el.scrollLeft / maxScroll;
     setSliderValue(ratio * 100);
   };
 
-  // --- 휠로도 가로 스크롤 가능하게 (원하면 유지) ---
+  // ✅ 데스크탑에서만 휠을 가로 스크롤로 변환 (모바일은 기본 세로 스크롤 유지)
   const handleWheel = (e) => {
-    if (!sliderRef.current) return;
-    sliderRef.current.scrollLeft += e.deltaY;
+    if (isMobile) return; // 모바일은 터치 스크롤 그대로
+    const el = sliderRef.current;
+    if (!el) return;
+    el.scrollLeft += e.deltaY;
   };
 
   return (
-    <div className="page1-wrapper">
-      {/* 상단 제목 영역 */}
+    <div className={`page1-wrapper ${isMobile ? 'mobile' : ''}`}>
       <header className="page1-header">
-        <h1>연대기</h1>
-        {/* <p>아래 슬라이드 바를 드래그해서 같이 걸어온 시간을 쭉 훑어봐요.</p> */}
       </header>
 
-      {/* 가운데: 연대기 타임라인 (가로 스크롤) */}
       <main className="timeline-drag-area">
         <div
           className="timeline-strip"
@@ -119,8 +144,13 @@ const groupList = useMemo(() => {
         >
           {groupList.map((group, index) => {
             const { key, rep } = group;
-            const positionClass =
-              index % 2 === 0 ? 'timeline-card top' : 'timeline-card bottom';
+
+            // ✅ 모바일이면 top/bottom 번갈이 대신 단일 스타일로
+            const positionClass = isMobile
+              ? 'timeline-card mobile'
+              : index % 2 === 0
+                ? 'timeline-card top'
+                : 'timeline-card bottom';
 
             return (
               <div
@@ -132,13 +162,10 @@ const groupList = useMemo(() => {
                   <div className="timeline-frame">
                     <img src={rep.url} alt={rep.name} />
                   </div>
+
                   <div className="timeline-label">
                     <span className="timeline-label-main">{rep.name}</span>
-                    {rep.content && (
-                      <span className="timeline-label-sub">
-                        {rep.content}
-                      </span>
-                    )}
+                    {rep.content && <span className="timeline-label-sub">{rep.content}</span>}
                   </div>
                 </div>
               </div>
@@ -147,7 +174,6 @@ const groupList = useMemo(() => {
         </div>
       </main>
 
-      {/* 아래쪽 슬라이드 바 (여기를 드래그할 때만 연대기 이동) */}
       <div className="timeline-slider-container">
         <input
           type="range"
@@ -159,66 +185,74 @@ const groupList = useMemo(() => {
         />
       </div>
 
-      {/* 페이지 네비게이터 */}
       <div className="page1-nav">
         <PageNavigator />
       </div>
 
-      {/* 팝업 모달 - 같은 x 그룹만 화살표 슬라이드 */}
 {isModalOpen && currentImage && (
   <div className="image-modal-backdrop" onClick={closeModal}>
-    <div
-      className="image-modal"
-      onClick={(e) => e.stopPropagation()}
-    >
-<button
-  type="button"
-  className="image-modal-close"
-  onClick={(e) => {
-    e.stopPropagation();  // 배경 onClick으로 전달 안 되게
-    closeModal();
-  }}
->
-  ✕
-</button>
+    <div className="image-modal" onClick={(e) => e.stopPropagation()}>
+      <button
+        type="button"
+        className="image-modal-close"
+        onClick={(e) => {
+          e.stopPropagation();
+          closeModal();
+        }}
+        aria-label="닫기"
+      >
+        ✕
+      </button>
 
-
-      {/* 🔹 이미지 + 화살표 영역 */}
-      <div className="image-modal-main">
-        {currentGroup.length > 1 && currentIndex > 0 && (
-          <button
-            className="image-modal-arrow left"
-            onClick={showPrev}
-          >
-            ◀
-          </button>
-        )}
-
+      {/* ✅ 이미지 영역: 스와이프는 여기서 처리 */}
+      <div
+        className="image-modal-main"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         <img
           src={currentImage.url}
           alt={currentImage.name}
           className="image-modal-img"
         />
+      </div>
 
-        {currentGroup.length > 1 &&
-          currentIndex < currentGroup.length - 1 && (
-            <button
-              className="image-modal-arrow right"
-              onClick={showNext}
-            >
-              ▶
-            </button>
-          )}
+      {/* ✅ 제목 줄 양옆에 화살표 */}
+      <div className="image-modal-title-row">
+        <button
+          type="button"
+          className="image-modal-nav-btn"
+          onClick={showPrev}
+          disabled={!(currentGroup.length > 1 && currentIndex > 0)}
+          aria-label="이전 사진"
+        >
+          ◀
+        </button>
+
+        <div className="image-modal-title-wrap">
+          <h2 className="image-modal-title">{currentImage.name}</h2>
+          <div className="image-modal-count">
+            {currentIndex + 1} / {currentGroup.length}
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="image-modal-nav-btn"
+          onClick={showNext}
+          disabled={!(currentGroup.length > 1 && currentIndex < currentGroup.length - 1)}
+          aria-label="다음 사진"
+        >
+          ▶
+        </button>
       </div>
 
       <div className="image-modal-text">
-        <h2>{currentImage.name}</h2>
         <p>{currentImage.content}</p>
       </div>
     </div>
   </div>
 )}
-
     </div>
   );
 }

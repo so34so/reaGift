@@ -1,7 +1,7 @@
-// src/pages/Page2.jsx (지금 Page1.js 이름만 바꿨다 했으니까 맞춰서)
+// src/pages/Page2.jsx
 import PageNavigator from '../components/PageNavigator.jsx';
 import DesktopDragMentBoard from '../components/DesktopDragMentBoard.jsx';
-import MobileMentList from '../components/MobileMentList.jsx';
+import MobileDragMentBoard from '../components/MobileDragMentBoard.jsx'; // ✅ 추가
 import { useDeviceMode } from '../hooks/useDeviceMode';
 import './Page2.css';
 
@@ -11,7 +11,7 @@ export default function Page2() {
   return (
     <div className="page2-root">
       <div className="page2-main">
-        {isMobile ? <MobileMentList /> : <DesktopDragMentBoard />}
+        {isMobile ? <MobileDragMentBoard /> : <DesktopDragMentBoard />}
       </div>
 
       <div className="page2-nav">

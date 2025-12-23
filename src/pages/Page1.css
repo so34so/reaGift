@@ -323,3 +323,140 @@ z-index: 2;
     right: 12px;
   }
 }
+/* =========================
+   모바일: 세로 타임라인 모드
+   ========================= */
+.page1-wrapper.mobile .timeline-drag-area {
+  padding: 10px 12px 0;
+  align-items: stretch; /* 세로 리스트가 꽉 차게 */
+}
+
+.page1-wrapper.mobile .timeline-strip {
+  flex-direction: column;  /* ✅ 가로 → 세로 */
+  gap: 18px;
+
+  overflow-y: auto;        /* ✅ 세로 스크롤 */
+  overflow-x: hidden;
+
+  padding-bottom: 16px;
+
+  /* 선택사항: 스냅으로 "슬라이드처럼" 넘어가는 느낌 */
+  scroll-snap-type: y proximity;
+}
+
+.page1-wrapper.mobile .timeline-card {
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;            /* 기존 60vh 고정 해제 */
+  justify-content: center;
+
+  /* 선택사항: 스냅 */
+  scroll-snap-align: center;
+}
+
+.page1-wrapper.mobile .timeline-card-inner {
+  width: 100%;
+}
+
+.page1-wrapper.mobile .timeline-frame {
+  height: 55vh;            /* 모바일에서 이미지 크게 */
+  border-radius: 16px;
+}
+
+/* top/bottom 변형 제거 */
+.page1-wrapper.mobile .timeline-card.top .timeline-frame,
+.page1-wrapper.mobile .timeline-card.bottom .timeline-frame {
+  transform: none;
+}
+
+.page1-wrapper.mobile .timeline-label {
+  max-width: 100%;
+  padding: 0 10px;
+}
+
+.page1-wrapper.mobile .timeline-slider-container {
+  padding: 0 12px;
+  margin-bottom: 90px;
+}
+/* ✅ 타이틀 + 네비(화살표) 줄 */
+.image-modal-title-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.image-modal-title-wrap {
+  flex: 1;
+  text-align: center;
+}
+
+.image-modal-title {
+  margin: 0;
+  font-size: 1.6rem;
+  line-height: 1.2;
+}
+
+.image-modal-count {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* ✅ 아래쪽 화살표 버튼 (겹침 없음, 터치 타겟 확보) */
+.image-modal-nav-btn {
+  border: 1px solid #e3e3e3;
+  background: #fff;
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-size: 1.25rem;
+  cursor: pointer;
+  min-width: 48px;  /* 터치 타겟 */
+  min-height: 44px;
+}
+
+.image-modal-nav-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* ✅ 스와이프 시 브라우저가 이상하게 확대/선택하지 않도록 보조 */
+.image-modal-main {
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y; /* 세로는 스크롤 허용, 가로는 우리가 스와이프로 해석 */
+}
+@media (max-width: 768px) {
+  .image-modal-close {
+    top: -8px;
+    right: 4px;          /* ✅ 더 오른쪽 */
+    width: 34px;
+    height: 34px;
+  }
+}
+.page1-wrapper:not(.mobile) .timeline-card {
+  flex: 0 0 300px;                 /* 카드 폭 약간 확대(선택) */
+  height: clamp(560px, 78vh, 820px); /* 60vh 대신: 화면에 맞춰 크게 */
+}
+
+.page1-wrapper:not(.mobile) .timeline-frame {
+  height: clamp(380px, 56vh, 650px); /* 40vh 대신: 사진을 더 크게 */
+}
+
+/* ✅ transform 대신 margin으로 위치 조정 (겹침 방지) */
+.page1-wrapper:not(.mobile) .timeline-card.top .timeline-frame {
+  transform: none;          /* 혹시 남아있으면 무력화 */
+}
+
+.page1-wrapper:not(.mobile) .timeline-card.bottom .timeline-frame {
+  transform: none;
+  margin-top: 18px;         /* 아래로 살짝 (라벨도 같이 내려감 → 겹침 없음) */
+}
+
+/* 라벨 간격은 margin-top 유지/조정 */
+.timeline-label {
+  margin-top: 10px;         /* 필요하면 12~16px로 키우면 더 깔끔 */
+}

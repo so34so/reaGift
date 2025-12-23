@@ -1,0 +1,54 @@
+/* src/components/MobileDragMentBoard.css */
+
+.m-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  touch-action: none;         /* 스와이프를 페이지 스크롤로 넘기지 않게 */
+  overscroll-behavior: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  cursor: grab;
+}
+.m-viewport.dragging { cursor: grabbing; }
+
+.m-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+/* ✅ 보드 전체를 이미지가 꽉 채움(보드 크기 자체가 이미지 비율이므로 왜곡 없음) */
+.m-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 보드 비율이 이미지 비율과 동일하니 사실상 전체 사용 */
+  pointer-events: none;
+}
+
+/* 멘트 */
+.m-note {
+  position: absolute;
+  max-width: 210px; /* NOTE_MAX_W와 맞추기 */
+  transform: translate(-50%, -50%) rotate(var(--rotate-deg));
+
+  color: #fff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  text-shadow: 0 0 6px rgba(0,0,0,0.85);
+  opacity: 0.96;
+  cursor: pointer;
+}
+
+.m-note-text {
+  margin: 0;
+  font-size: var(--font-size, 18px);
+  font-weight: 800;
+  line-height: 1.35;
+  word-break: keep-all;
+}

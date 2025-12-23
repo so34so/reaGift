@@ -136,36 +136,12 @@ const DesktopDragMentBoard = () => {
               }}
             >
               <p className="drag-note-text">{item.content}</p>
-              <p className="drag-note-author">- {item.name}</p>
             </div>
           );
         })}
       </div>
 
-      {/* 팝업 모달 */}
-      {selected && (
-        <div className="drag-modal-backdrop" onClick={handleClose}>
-          <div
-            className="drag-modal"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="drag-modal-header">
-              <h3>메시지</h3>
-              <button
-                type="button"
-                className="drag-modal-close"
-                onClick={handleClose}
-              >
-                ✕
-              </button>
-            </div>
-            <div className="drag-modal-body">
-              <p className="drag-modal-content">{selected.content}</p>
-              <p className="drag-modal-author">- {selected.name}</p>
-            </div>
-          </div>
-        </div>
-      )}
+
     </div>
   );
 };
