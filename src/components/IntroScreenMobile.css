@@ -1,0 +1,273 @@
+.intro-m-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+.intro-m-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 모바일은 꽉 차게 */
+  object-position: center;
+}
+
+.intro-m-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  /* 하단으로 갈수록 진해지는 그라데이션 */
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.10) 0%,
+    rgba(0,0,0,0.15) 40%,
+    rgba(0,0,0,0.55) 100%
+  );
+  padding: 18px;
+  padding-bottom: calc(18px + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+.intro-m-sheet {
+  width: 100%;
+  max-width: 560px;
+  box-sizing: border-box;
+  border-radius: 22px;
+  padding: 16px 16px 14px;
+  color: #fff;
+  text-align: left;
+
+  /* 유리 느낌(지원되는 브라우저에서만 적용) */
+  background: rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.intro-m-kicker {
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  opacity: 0.85;
+  margin-bottom: 8px;
+}
+
+.intro-m-title {
+  margin: 0 0 10px;
+  font-size: clamp(1.25rem, 6.2vw, 1.8rem);
+  line-height: 1.15;
+
+  /* "추 억" 같은 쪼개짐 방지 */
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.intro-m-content {
+  margin: 0 0 14px;
+  font-size: clamp(0.95rem, 3.8vw, 1.05rem);
+  line-height: 1.5;
+  opacity: 0.95;
+
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.intro-m-button {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 999px;
+  border: none;
+  background: #ffffff;
+  color: #222;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.intro-fade-in { animation: introFadeIn 0.8s ease-out forwards; }
+.intro-fade-out { animation: introFadeOut 0.6s ease-in forwards; }
+
+@keyframes introFadeIn {
+  from { opacity: 0; transform: scale(1.02); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes introFadeOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(1.03); }
+}
+/* ====== 배경 마키(영상처럼 흐르는) ====== */
+.m-marquee {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* 가장자리 자연스럽게 페이드 (지원 브라우저에서만 적용) */
+.m-marquee::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* 가장자리 살짝 어둡게 + 중앙 대비 */
+  background: radial-gradient(
+    circle at center,
+    rgba(0,0,0,0.10) 0%,
+    rgba(0,0,0,0.20) 55%,
+    rgba(0,0,0,0.34) 100%
+  );
+  z-index: 2;
+}
+
+.m-marquee__track {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  gap: 0;               /* 필요하면 6px~12px로 */
+  will-change: transform;
+
+  animation: mScroll var(--duration) linear infinite;
+}
+
+/* 각 이미지 패널 */
+.m-marquee__item {
+  flex: 0 0 var(--itemW);
+  height: 100%;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* 너무 선명한 경계가 보이면 살짝 톤 다운 */
+  filter: saturate(1.03) contrast(1.02);
+  transform: scale(1.02);
+}
+
+/* 기본: 오른쪽→왼쪽으로 흐름(이미지들이 왼쪽으로 이동) */
+@keyframes mScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); } /* 2배로 붙였기 때문에 -50%면 정확히 한 바퀴 */
+}
+
+/* 좌→우로 흐르게(요청사항): 애니메이션 방향만 반대로 */
+.m-marquee.is-ltr .m-marquee__track {
+  animation-direction: reverse;
+}
+
+.m-marquee.is-rtl .m-marquee__track {
+  animation-direction: normal;
+}
+/* ====== 바둑판 배경 + 무한 흐름 ====== */
+.m-mosaic {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* 전체 톤을 부드럽게(원하는 감성에 맞춰 조절) */
+.m-mosaic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+
+  /* 가장자리 살짝 어둡게 + 중앙 집중 */
+  background: radial-gradient(
+    circle at center,
+    rgba(0,0,0,0.08) 0%,
+    rgba(0,0,0,0.20) 55%,
+    rgba(0,0,0,0.32) 100%
+  );
+}
+
+.m-mosaic__track {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  height: 100%;
+  will-change: transform;
+
+  animation: mosaicScroll var(--duration) linear infinite;
+}
+
+/* 패널 1개 = 화면 폭 1개 */
+.m-mosaic__panel {
+  flex: 0 0 100vw;
+  height: 100%;
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  grid-template-rows: repeat(var(--rows), 1fr);
+  gap: var(--gap);
+  padding: var(--gap);
+}
+
+/* 타일 */
+.m-mosaic__tile {
+  border-radius: 14px;
+  overflow: hidden;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* 영상 느낌(원하면 수치 낮추세요) */
+  filter: saturate(1.03) contrast(1.02);
+  opacity: 0.95;
+
+  transform: scale(1.02);
+}
+
+/* 기본은 오른쪽→왼쪽으로 이동 */
+@keyframes mosaicScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); } /* 2배로 붙였으니 -50%가 정확히 1바퀴 */
+}
+
+/* 좌→우 요청: reverse */
+.m-mosaic.is-ltr .m-mosaic__track {
+  animation-direction: reverse;
+}
+.m-mosaic.is-rtl .m-mosaic__track {
+  animation-direction: normal;
+}
+
+/* 모션 줄이기 */
+@media (prefers-reduced-motion: reduce) {
+  .m-mosaic__track { animation: none; transform: translateX(0); }
+}
+/* wrapper를 stacking context로 */
+.intro-m-wrapper {
+  position: relative;
+}
+
+/* 배경(모자이크) 레이어는 가장 아래 */
+.m-mosaic {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* 모자이크 위에 얹는 딤(::after)이 있으면, 배경 내에서만 */
+.m-mosaic::after {
+  z-index: 1;           /* (중요) */
+  pointer-events: none;
+}
+
+/* 실제 콘텐츠(오버레이/시트)는 딤보다 위로 */
+.intro-m-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;           /* (중요) */
+}
+
+/* 시트는 overlay 안에서도 가장 위 */
+.intro-m-sheet {
+  position: relative;
+  z-index: 6;           /* (중요) */
+}
