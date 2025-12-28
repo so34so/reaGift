@@ -1,0 +1,53 @@
+/* src/pages/DesktopOnly.css */
+.only-wrapper{
+  min-height: 100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 24px;
+  background: #0b0b0b;
+  color: #fff;
+}
+
+.only-card{
+  width: 100%;
+  max-width: 520px;
+  border-radius: 22px;
+  padding: 18px 16px 16px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.only-kicker{
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  opacity: 0.85;
+  margin-bottom: 10px;
+}
+
+.only-title{
+  margin: 0 0 10px;
+  font-size: 1.6rem;
+  line-height: 1.2;
+}
+
+.only-desc{
+  margin: 0 0 14px;
+  font-size: 1rem;
+  line-height: 1.55;
+  opacity: 0.92;
+}
+
+.only-tips{
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(255,255,255,0.18);
+}
+
+.only-tip{
+  font-size: 0.95rem;
+  opacity: 0.9;
+  margin: 6px 0;
+}

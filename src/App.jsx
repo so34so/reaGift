@@ -8,13 +8,13 @@ import Page3 from './pages/Page3.jsx';
 import IntroScreen from './components/IntroScreen.jsx';
 import IntroScreenMobile from './components/IntroScreenMobile.jsx';
 import EndPage from './pages/EndPage.jsx';
-
+import DesktopOnly from './pages/DesktopOnly.jsx';
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
   // 모바일/데스크탑 인트로 선택
-  const Intro = useMemo(() => (realIsMobile ? IntroScreenMobile : IntroScreen), []);
+  const Intro = useMemo(() => (realIsMobile ? IntroScreenMobile : DesktopOnly), []);
 
   useEffect(() => {
     if (location.pathname !== '/') {
