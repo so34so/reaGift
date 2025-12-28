@@ -23,11 +23,12 @@ export default function PageNavigator() {
 
   return (
     <div className="nav-wrapper">
-      <button className="nav-arrow" onClick={goPrev}>◀</button>
+      <button type="button" className="nav-arrow" onClick={goPrev}>◀</button>
 
       <div className="nav-dots">
         {pagePaths.map((path, idx) => (
           <button
+            type="button" 
             key={path}
             className={`nav-dot ${idx === safeIndex ? 'active' : ''}`}
             onClick={() => navigate(path)}
@@ -35,7 +36,7 @@ export default function PageNavigator() {
         ))}
       </div>
 
-      <button className="nav-arrow" onClick={goNext}>▶</button>
+      <button type="button" className="nav-arrow" onClick={goNext}>▶</button>
     </div>
   );
 }

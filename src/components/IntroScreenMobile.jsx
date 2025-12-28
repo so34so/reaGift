@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { introImages, MAIN_INTRO_ID } from '../data/introImages';
 import { imageList } from '../data/ImageList';
@@ -8,6 +8,16 @@ import './IntroScreenMobile.css';
 export default function IntroScreenMobile() {
   const navigate = useNavigate();
   const [isLeaving, setIsLeaving] = useState(false);
+
+  const uniqueImageList = useMemo(() => {
+    const seen = new Set();
+    return imageList.filter((it) => {
+      if (!it?.url) return false;
+      if (seen.has(it.url)) return false;
+      seen.add(it.url);
+      return true;
+    });
+  }, []);
 
   const selected =
     introImages.find((item) => item.id === MAIN_INTRO_ID) || introImages[0];
@@ -30,14 +40,14 @@ export default function IntroScreenMobile() {
     >
       {/* ✅ 바둑판 배경 + 좌→우 흐름 */}
       <MobileBgMosaicMarquee
-        items={imageList}     // x는 무시, id/url 기반으로 처리
+        items={uniqueImageList}     // x는 무시, id/url 기반으로 처리
         cols={3}
         rows={6}
         gapPx={8}
-        durationSec={26}
+        durationSec={18}
         direction="ltr"
         seed={20251226}
-        maxUnique={24}
+        maxUnique={36}
       />
 
       <div className="intro-m-overlay">

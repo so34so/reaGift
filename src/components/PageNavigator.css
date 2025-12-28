@@ -1,38 +1,83 @@
-/* src/components/PageNavigator.css */
+/* PageNavigator.css - Design C */
 
 .nav-wrapper {
   position: fixed;
-  bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  z-index: 999;
+
   display: flex;
   align-items: center;
   gap: 12px;
+
+  padding: 10px 14px;
+  border-radius: 999px;
+
+  background: rgba(2, 6, 23, 0.55);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.22);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.nav-wrapper button {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  line-height: 1;
 }
 
 .nav-arrow {
-  border: none;
-  background: #174f68;
-  color: #fff;
-  padding: 4px 10px;
-  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+
+  display: grid;
+  place-items: center;
+
+  background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.92);
+
   cursor: pointer;
+  transition: transform 120ms ease, background 120ms ease;
 }
+
+.nav-arrow:hover { background: rgba(255,255,255,0.16); }
+.nav-arrow:active { transform: scale(0.96); }
 
 .nav-dots {
   display: flex;
-  gap: 8px;
+  align-items: center;
+  gap: 10px;
+  padding: 0 2px;
 }
 
 .nav-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: 2px solid #174f68;
-  background: #fff;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,0.28);
   cursor: pointer;
+
+  transition: transform 140ms ease, background 140ms ease;
 }
 
 .nav-dot.active {
-  background: red;
+  background: rgba(255,255,255,0.92);
+  transform: scale(1.35);
+}
+
+.nav-dot:hover { transform: scale(1.15); }
+
+.nav-dot:focus-visible,
+.nav-arrow:focus-visible {
+  outline: 3px solid rgba(56, 189, 248, 0.55);
+  outline-offset: 3px;
 }

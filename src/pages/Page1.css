@@ -115,6 +115,7 @@
   display: block;
   font-weight: 700;
   font-size: 1rem;
+  color:#000;
 }
 
 .timeline-label-sub {
@@ -164,11 +165,7 @@
 
 /* 페이지 네비게이터 위치 */
 .page1-nav {
-  position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 5;
+  flex-shrink: 0;
 }
 
 /* -------- 팝업(모달) 스타일 -------- */
