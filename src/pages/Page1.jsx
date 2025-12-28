@@ -174,17 +174,6 @@ const handleTouchEnd = (e) => {
         </div>
       </main>
 
-      <div className="timeline-slider-container">
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value={sliderValue}
-          onChange={handleSliderChange}
-          className="timeline-slider"
-        />
-      </div>
-
       <div className="page1-nav">
         <PageNavigator />
       </div>
