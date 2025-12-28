@@ -387,6 +387,7 @@ z-index: 2;
   gap: 12px;
   margin-top: 6px;
   margin-bottom: 6px;
+  color:#000;
 }
 
 .image-modal-title-wrap {
@@ -398,6 +399,7 @@ z-index: 2;
   margin: 0;
   font-size: 1.6rem;
   line-height: 1.2;
+  color:#000;
 }
 
 .image-modal-count {
@@ -416,11 +418,13 @@ z-index: 2;
   cursor: pointer;
   min-width: 48px;  /* 터치 타겟 */
   min-height: 44px;
+  color:#000;
 }
 
 .image-modal-nav-btn:disabled {
   opacity: 0.35;
   cursor: default;
+  color: rgba(0, 0, 0, 0.35);
 }
 
 /* ✅ 스와이프 시 브라우저가 이상하게 확대/선택하지 않도록 보조 */
