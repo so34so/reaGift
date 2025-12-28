@@ -22,6 +22,10 @@ export default function Page3() {
   const [pos, setPos] = useState(1);
   const [enableTransition, setEnableTransition] = useState(true);
 
+  const handleCloseFinalCoupon = () => {
+  setShowFinalCoupon(false);
+};
+
   // 드래그(스와이프) 상태
   const swipeRef = useRef(null);
   const startXRef = useRef(0);
@@ -252,34 +256,54 @@ export default function Page3() {
       </div>
 
       {/* 개별 쿠폰 모달 */}
-      {selectedCoupon && (
-        <div className="coupon-backdrop" onClick={handleCloseCoupon}>
-          <div className="coupon-card" onClick={(e) => e.stopPropagation()}>
-            <div className="coupon-paper-stain" />
-            <div className="coupon-title">{selectedCoupon.title}</div>
-            <div className="coupon-divider" />
-            <div className="coupon-desc">{selectedCoupon.desc}</div>
-            <button type="button" className="coupon-close-btn" onClick={handleCloseCoupon}>
-              쿠폰 닫기
-            </button>
-          </div>
-        </div>
-      )}
+{selectedCoupon && (
+  <div className="coupon-backdrop is-open" onClick={handleCloseCoupon}>
+    <article
+      className="coupon-sheet"
+      role="dialog"
+      aria-modal="true"
+      onClick={(e) => e.stopPropagation()}
+    >
+
+
+
+
+      <h2 className="coupon-title">{selectedCoupon.title}</h2>
+      <div className="coupon-dash" />
+      <p className="coupon-desc">{selectedCoupon.desc}</p>
+
+      <button type="button" className="coupon-close-btn" onClick={handleCloseCoupon}>
+        쿠폰 닫기
+      </button>
+    </article>
+  </div>
+)}
+
 
       {/* 마지막 약속 쿠폰 모달 */}
-      {showFinalCoupon && (
-        <div className="coupon-backdrop" onClick={handleGoEnd}>
-          <div className="coupon-card coupon-final" onClick={(e) => e.stopPropagation()}>
-            <div className="coupon-paper-stain" />
-            <div className="coupon-title">{finalCoupon.title}</div>
-            <div className="coupon-divider" />
-            <div className="coupon-desc">{finalCoupon.desc}</div>
-            <button type="button" className="coupon-go-end-btn" onClick={handleGoEnd}>
-              엔딩으로 가기
-            </button>
-          </div>
-        </div>
-      )}
+{showFinalCoupon && (
+  <div className="coupon-backdrop is-open" onClick={handleGoEnd}>
+    <article
+      className="coupon-sheet coupon-final-sheet"
+      role="dialog"
+      aria-modal="true"
+      onClick={(e) => e.stopPropagation()}
+    >
+
+
+
+
+      <h2 className="coupon-title">{finalCoupon.title}</h2>
+      <div className="coupon-dash" />
+      <p className="coupon-desc">{finalCoupon.desc}</p>
+
+      <button type="button" className="coupon-close-btn" onClick={handleGoEnd}>
+        약속하기
+      </button>
+    </article>
+  </div>
+)}
+
     </div>
   );
 }

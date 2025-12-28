@@ -173,3 +173,269 @@
     border-radius: 22px 22px 18px 18px;
   }
 }
+/* ===== Coupon Modal (Ticket-style) ===== */
+.coupon-backdrop{
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 12px;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 999;
+  opacity: 0;
+  animation: couponDimIn 180ms ease forwards;
+}
+
+@keyframes couponDimIn {
+  to { opacity: 1; }
+}
+
+.coupon-sheet{
+  width: 100%;
+  max-width: 520px;
+  border-radius: 22px;
+  position: relative;
+  padding: 16px 16px 14px;
+  background: #fff;
+  color: #111;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.35);
+  transform: translateY(14px);
+  animation: couponUp 220ms cubic-bezier(.2,.9,.2,1) forwards;
+  overflow: hidden;
+}
+
+@keyframes couponUp {
+  to { transform: translateY(0); }
+}
+
+/* “티켓 펀칭(반원)” */
+.coupon-sheet::before,
+.coupon-sheet::after{
+  content:"";
+  position:absolute;
+  top: 42%;
+  width: 22px;
+  height: 22px;
+  background: rgba(0,0,0,0.45); /* backdrop와 색 매칭 */
+  border-radius: 999px;
+  transform: translateY(-50%);
+}
+.coupon-sheet::before{ left: -11px; }
+.coupon-sheet::after{ right: -11px; }
+
+/* 종이 질감(은은) */
+.coupon-sheet .coupon-paper-stain{
+  display:none; /* 기존 stain 쓰고 있으면 끄거나 아래로 교체 */
+}
+.coupon-sheet{
+  background-image:
+    radial-gradient(circle at 20% 15%, rgba(255, 206, 214, 0.28), transparent 38%),
+    radial-gradient(circle at 80% 85%, rgba(210, 228, 255, 0.28), transparent 42%),
+    linear-gradient(0deg, rgba(0,0,0,0.03), rgba(0,0,0,0.01));
+}
+
+/* 닫기 X */
+.coupon-x{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.10);
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-size: 22px;
+  line-height: 34px;
+  cursor: pointer;
+}
+
+/* 상단 메타 */
+.coupon-meta{
+  display:flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.coupon-chip{
+  font-size: 0.78rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.06);
+  color: rgba(0,0,0,0.70);
+  letter-spacing: 0.06em;
+}
+
+/* 제목/구분선/본문 */
+.coupon-title{
+  margin: 0 0 10px;
+  font-size: clamp(1.1rem, 4.8vw, 1.35rem);
+  line-height: 1.2;
+  word-break: keep-all;
+}
+.coupon-dash{
+  height: 1px;
+  background:
+    repeating-linear-gradient(
+      to right,
+      rgba(0,0,0,0.22) 0 10px,
+      transparent 10px 18px
+    );
+  margin: 10px 0 12px;
+}
+.coupon-desc{
+  margin: 0 0 14px;
+  font-size: clamp(0.96rem, 3.9vw, 1.05rem);
+  line-height: 1.55;
+  color: rgba(0,0,0,0.78);
+  word-break: keep-all;
+  white-space: pre-line; /* desc에 줄바꿈 넣으면 그대로 표현 */
+}
+
+/* 버튼 */
+.coupon-close-btn{
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 999px;
+  border: none;
+  background: #111;
+  color: #fff;
+  font-weight: 800;
+}
+/* ===== Coupon Modal (Ticket-style) ===== */
+.coupon-backdrop{
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 12px;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 999;
+  opacity: 0;
+  animation: couponDimIn 180ms ease forwards;
+}
+
+@keyframes couponDimIn {
+  to { opacity: 1; }
+}
+
+.coupon-sheet{
+  width: 100%;
+  max-width: 520px;
+  border-radius: 22px;
+  position: relative;
+  padding: 16px 16px 14px;
+  background: #fff;
+  color: #111;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.35);
+  transform: translateY(14px);
+  animation: couponUp 220ms cubic-bezier(.2,.9,.2,1) forwards;
+  overflow: hidden;
+}
+
+@keyframes couponUp {
+  to { transform: translateY(0); }
+}
+
+/* “티켓 펀칭(반원)” */
+.coupon-sheet::before,
+.coupon-sheet::after{
+  content:"";
+  position:absolute;
+  top: 42%;
+  width: 22px;
+  height: 22px;
+  background: rgba(0,0,0,0.45); /* backdrop와 색 매칭 */
+  border-radius: 999px;
+  transform: translateY(-50%);
+}
+.coupon-sheet::before{ left: -11px; }
+.coupon-sheet::after{ right: -11px; }
+
+/* 종이 질감(은은) */
+.coupon-sheet .coupon-paper-stain{
+  display:none; /* 기존 stain 쓰고 있으면 끄거나 아래로 교체 */
+}
+.coupon-sheet{
+  background-image:
+    radial-gradient(circle at 20% 15%, rgba(255, 206, 214, 0.28), transparent 38%),
+    radial-gradient(circle at 80% 85%, rgba(210, 228, 255, 0.28), transparent 42%),
+    linear-gradient(0deg, rgba(0,0,0,0.03), rgba(0,0,0,0.01));
+}
+
+/* 닫기 X */
+.coupon-x{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.10);
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-size: 22px;
+  line-height: 34px;
+  cursor: pointer;
+}
+
+/* 상단 메타 */
+.coupon-meta{
+  display:flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.coupon-chip{
+  font-size: 0.78rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.06);
+  color: rgba(0,0,0,0.70);
+  letter-spacing: 0.06em;
+}
+
+/* 제목/구분선/본문 */
+.coupon-title{
+  margin: 0 0 10px;
+  font-size: clamp(1.1rem, 4.8vw, 1.35rem);
+  line-height: 1.2;
+  word-break: keep-all;
+}
+.coupon-dash{
+  height: 1px;
+  background:
+    repeating-linear-gradient(
+      to right,
+      rgba(0,0,0,0.22) 0 10px,
+      transparent 10px 18px
+    );
+  margin: 10px 0 12px;
+}
+.coupon-desc{
+  margin: 0 0 14px;
+  font-size: clamp(0.96rem, 3.9vw, 1.05rem);
+  line-height: 1.55;
+  color: rgba(0,0,0,0.78);
+  word-break: keep-all;
+  white-space: pre-line; /* desc에 줄바꿈 넣으면 그대로 표현 */
+}
+
+/* 버튼 */
+.coupon-close-btn{
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 999px;
+  border: none;
+  background: #111;
+  color: #fff;
+  font-weight: 800;
+}
