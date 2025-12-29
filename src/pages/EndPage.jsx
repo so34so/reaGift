@@ -25,7 +25,7 @@ export default function EndPage() {
           <p className="endP-desc">
             지금까지의 아모레, 이제 시작될 아우,
             <br />
-            그리고 그 이후의 레아까지 천천히 함께 걸어갈게.
+            그리고 그 이후의 레아까지 옆에서 항상 응원할게. 잘 부탁해!!🤍🤍🤍
           </p>
 
           <div className="endP-actions">

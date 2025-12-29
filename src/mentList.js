@@ -28,15 +28,9 @@ export const exampleMentList = [
   { id: 26, name: ' ', content: '레아 이쁘다' },
   { id: 27, name: ' ', content: '우리 레아 최고!!!!! 레아 최고다!!!!!!' },
   { id: 28, name: ' ', content: 'au에서도 좋은 모습 기대할게' },
-  { id: 18, name: ' ', content: '' },
-  { id: 18, name: ' ', content: '' },
-  { id: 18, name: ' ', content: '' },
-  { id: 18, name: ' ', content: '' },
-  { id: 18, name: ' ', content: '' },
-  { id: 18, name: ' ', content: '' },
-  { id: 18, name: ' ', content: '' },
-  { id: 18, name: ' ', content: '' },
-  { id: 18, name: ' ', content: '' },
+  { id: 29, name: ' ', content: '레아의 모든 것을 응원해' },
+  { id: 30, name: ' ', content: '너무 잘하고 있어 지금 파이팅!!' },
+  { id: 31, name: ' ', content: '잘한다!잘한다!잘한다!우리레아 잘한다!' },
 ];
 
 // export const exampleMentList = [

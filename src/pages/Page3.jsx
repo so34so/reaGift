@@ -246,7 +246,7 @@ export default function Page3() {
           )}
 
           <p className="gift-hint">
-            세 개의 쿠폰을 모두 열면 마지막 약속 쿠폰이 등장해요.
+            쿠폰을 모두 열어봐!!!
           </p>
         </section>
       </main>
